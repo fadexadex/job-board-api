@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../../utils/jwt";
-import { AppError } from "middlewares/errorHandler";
+import { AppError } from "../../middlewares/errorHandler";
 import { StatusCodes } from "http-status-codes";
 
 const authGuard = (req: Request, res: Response, next: NextFunction) => {
@@ -17,4 +17,22 @@ const authGuard = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default authGuard;
+const employerGuard = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user.role !== "employer") {
+    return res.status(StatusCodes.FORBIDDEN).json({
+      message: "You are not allowed to perform this action",
+    });
+  }
+  next();
+};
+
+const jobSeekerGuard = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user.role !== "job_seeker") {
+    return res.status(StatusCodes.FORBIDDEN).json({
+      message: "You are not allowed to perform this action",
+    });
+  }
+  next();
+};
+
+export { authGuard, employerGuard, jobSeekerGuard };
