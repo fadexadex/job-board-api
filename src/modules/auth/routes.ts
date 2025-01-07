@@ -3,7 +3,7 @@ import { loginController, registerController } from "./controllers";
 import {
   validateRegisterBody,
   validateLoginBody,
-} from "../middlewares/validators/validators";
+} from "../../middlewares/validators/validators";
 
 const router = express.Router();
 

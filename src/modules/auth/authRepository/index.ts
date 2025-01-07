@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { IUser, IUserCreate } from "utils/types";
+import {  IUserCreate } from "utils/types";
 
 class AuthRepository {
   private prisma: PrismaClient;
@@ -10,7 +10,7 @@ class AuthRepository {
     return await this.prisma.user.create({ data });
   }
   async getUserByEmail(email: string) {
-    return await this.prisma.user.findUnique({ where: { email } });
+    return await this.prisma.user.findUnique({ where: { email }, include:{employer: true, jobSeeker: true} });
   }
 } 
 

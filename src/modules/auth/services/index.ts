@@ -1,8 +1,8 @@
-import { AppError } from "../../middlewares/errorHandler";
+import { AppError } from "../../../middlewares/errorHandler";
 import AuthRepository from "../authRepository";
-import { hashPassword, comparePassword } from "../../utils/bcrypt";
-import { IUserRegisterBody, IUserLoginBody } from "../../utils/types";
-import { sanitizeUserAndGenerateToken } from "../../utils/sanitizer";
+import { hashPassword, comparePassword } from "../../../utils/bcrypt";
+import { IUserRegisterBody, IUserLoginBody } from "../../../utils/types";
+import { sanitizeUserAndGenerateToken } from "../../../utils/sanitizer";
 import { StatusCodes } from "http-status-codes";
 
 const authRepository = new AuthRepository();
