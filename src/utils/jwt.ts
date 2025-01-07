@@ -8,9 +8,7 @@ const generateToken = (payload: IUser) => {
 };
 
 const verifyToken = (token: string) => {
-  const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-  return decoded;
+  return jwt.verify(token, process.env.JWT_SECRET!);
 };
-
 
 export { generateToken, verifyToken };

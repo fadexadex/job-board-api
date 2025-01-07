@@ -8,6 +8,11 @@ const createEmployerController = async (
   next: NextFunction
 ) => {
   try {
+    if (req.user.role !== "employer") {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        message: "You are not allowed to perform this action",
+      });
+    }
     const employer = await createEmployer(req.body);
     res.status(StatusCodes.CREATED).json(employer);
   } catch (error) {
