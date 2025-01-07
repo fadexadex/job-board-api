@@ -1,16 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import {
-  registerSchema,
-  loginSchema,
-} from "../../middlewares/validators/validatorSchemas";
-import { AppError } from "../../middlewares/errorHandler";
+import { registerSchema, loginSchema } from "./schemas";
+import { AppError } from "../../errorHandler";
 
 export const validateRegisterBody = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { error } = registerSchema.validate(req.body, { abortEarly: false }); 
+  const { error } = registerSchema.validate(req.body, { abortEarly: false });
   if (error) {
     next(new AppError(error.details.map((err) => err.message).join(", "), 400));
   } else {
