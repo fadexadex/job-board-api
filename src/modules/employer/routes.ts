@@ -1,7 +1,7 @@
 import express from "express";
 import { createEmployerController } from "./controllers";
 import { validateCreateEmployer } from "../../middlewares/validators";
-import { authGuard, employerGuard } from "../../middlewares/routeGuards/authGuard";
+import { authGuard, employerGuard } from "../../middlewares/authGuard";
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../../utils/jwt";
-import { AppError } from "../../middlewares/errorHandler";
+import { verifyToken } from "../utils/jwt";
+import { AppError } from "./errorHandler";
 import { StatusCodes } from "http-status-codes";
 
 const authGuard = (req: Request, res: Response, next: NextFunction) => {
