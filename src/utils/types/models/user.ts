@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Role } from "./enums";
 
 export interface IUserCreate {
     fName: string;

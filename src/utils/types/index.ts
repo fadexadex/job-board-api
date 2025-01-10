@@ -8,5 +8,5 @@ declare global {
 
 export * from "./models/user";
 export * from "./models/employer";
-export * from "./models/role";
+export * from "./models/enums";
 export * from "./interfaces/userInterfaces";

@@ -1,4 +1,4 @@
-import { Role } from "../models/role";
+import { Role } from "../models/enums";
 
 export interface IUserRegisterBody {
   id: number;

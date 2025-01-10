@@ -37,28 +37,29 @@ model Employer {
 }
 
 model JobPostings {
-  id             Int         @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   employerId     Int
   jobTitle       String
   jobDescription String
   jobType        JobType
-  minSalary      Int?        // Minimum salary range
-  maxSalary      Int?        // Maximum salary range
-  locations       Json        // JSON format for city, state, etc.
+  minSalary      Int
+  maxSalary      Int
+  locations      String[]     // Array of country names
   industry       String?
-  requiredSkills Json?       // JSON array of required skills
-  qualifications String?
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  employer       Employer    @relation(fields: [employerId], references: [id])
+  requiredSkills String[]     // Array of required skills
+  qualifications String[]     // Array of qualifications
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  employer       Employer     @relation(fields: [employerId], references: [id])
   applications   Applications[]
 }
+
 
 model JobSeekerProfile {
   id             Int          @id @default(autoincrement())
   userId         Int          @unique
-  location       String?
-  skills         Json?        // JSON array of job seeker skills
+  location       String?      // Single location (country)
+  skills         String[]    // Array of job seeker skills
   resumeUrl      String?
   coverLetterUrl String?
   linkedin       String?
