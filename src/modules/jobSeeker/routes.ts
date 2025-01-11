@@ -11,9 +11,9 @@ const router = Router();
 router.post(
   "/create-profile",
   upload.fields([
-    { name: 'resume', maxCount: 1 },
-    { name: 'coverLetter', maxCount: 1 },
-  ]), //so the idea is that I get the chance to access the resume and the cover letter
+    { name: "resume", maxCount: 1 },
+    { name: "coverLetter", maxCount: 1 },
+  ]),
   createJobSeekerProfileController
 );
 

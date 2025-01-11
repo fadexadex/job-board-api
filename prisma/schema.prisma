@@ -44,7 +44,7 @@ model JobPostings {
   jobType        JobType
   minSalary      Int
   maxSalary      Int
-  locations      String[]     // Array of country names
+  locations      String[]     
   industry       String?
   requiredSkills String[]     // Array of required skills
   qualifications String[]     // Array of qualifications

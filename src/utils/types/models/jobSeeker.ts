@@ -1,3 +1,4 @@
+import { JobType } from "@prisma/client";
 import { ApplicationStatus } from "./enums";
 
 interface IApplication {
@@ -21,3 +22,9 @@ export interface IJobSeeker {
   applications: IApplication[];
 }
 
+export interface IFilter {
+  location: string[];
+  minSalary: number;
+  maxSalary: number;
+  jobType: JobType;
+}

@@ -1,8 +1,14 @@
+import { ParsedQs } from 'qs';
+
 declare global {
   namespace Express {
     interface Request {
       user?: any;
       fileValidationError?: string;
+      query: {
+        minSalary?: number;
+        maxSalary?: number;
+      }& ParsedQs
     }
   }
 }

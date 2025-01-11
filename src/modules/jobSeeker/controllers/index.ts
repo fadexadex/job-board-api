@@ -6,6 +6,8 @@ import {
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import uploadDocToCloud from "../../../utils/uploadDocToClodinary";
+import { IFilter } from "utils/types";
+import { JobType } from "@prisma/client";
 
 const createJobSeekerProfileController = async (
   req: Request,
@@ -26,7 +28,6 @@ const createJobSeekerProfileController = async (
     req.body.userId = Number(req.body.userId);
     req.body.resumeUrl = resumeUrl;
     req.body.skills = JSON.parse(req.body.skills);
-  
 
     const user = await createJobSeekerProfile(req.body);
 
@@ -42,7 +43,14 @@ const getAllJobPostingsController = async (
   next: NextFunction
 ) => {
   try {
-    const user = await getAllJobPostings();
+    const filter = req.query;
+    const filterObj: IFilter = {
+      location: (filter?.location ? [filter.location] : []) as string[],
+      minSalary: Number(filter?.minSalary),
+      maxSalary: Number(filter?.maxSalary),
+      jobType: filter?.jobType as JobType,
+    };
+    const user = await getAllJobPostings(filterObj);
     res.status(StatusCodes.ACCEPTED).json(user);
   } catch (error) {
     next(error);
