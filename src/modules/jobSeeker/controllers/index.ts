@@ -13,7 +13,6 @@ const createJobSeekerProfileController = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.body);
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
     const resumePath = files["resume"][0].path;
     const coverLetterPath = files?.["coverLetter"]?.[0]?.path;
@@ -21,9 +20,16 @@ const createJobSeekerProfileController = async (
       const coverLetterUrl = await uploadDocToCloud(coverLetterPath);
       req.body.coverLetter = coverLetterUrl;
     }
+
     const resumeUrl = await uploadDocToCloud(resumePath);
-    req.body.resume = resumeUrl;
+
+    req.body.userId = Number(req.body.userId);
+    req.body.resumeUrl = resumeUrl;
+    req.body.skills = JSON.parse(req.body.skills);
+  
+
     const user = await createJobSeekerProfile(req.body);
+
     res.status(StatusCodes.CREATED).json(user);
   } catch (error) {
     next(error);
