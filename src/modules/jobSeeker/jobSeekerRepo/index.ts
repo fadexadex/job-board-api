@@ -17,7 +17,7 @@ class JobSeekerRepository {
         ...(filterObj?.jobType && { jobType: filterObj.jobType }),
         ...(filterObj?.minSalary && { minSalary: { gte: filterObj.minSalary } }),
         ...(filterObj?.maxSalary && { maxSalary: { lte: filterObj.maxSalary } }),
-        // ...(filterObj?.location && { locations: { hasSome: filterObj.location } }),
+        ...(filterObj?.location && { locations: { hasSome: filterObj.location } }),
       },
       select: {
         id: true,

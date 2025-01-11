@@ -45,7 +45,7 @@ const getAllJobPostingsController = async (
   try {
     const filter = req.query;
     const filterObj: IFilter = {
-      location: (filter?.location ? [filter.location] : []) as string[],
+      location: (filter?.location ? [filter.location] : undefined) as string[],
       minSalary: Number(filter?.minSalary),
       maxSalary: Number(filter?.maxSalary),
       jobType: filter?.jobType as JobType,
