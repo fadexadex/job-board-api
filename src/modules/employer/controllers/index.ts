@@ -4,6 +4,7 @@ import {
   createEmployer,
   createJobPosting,
   getAllEmpoyerJobPostings,
+  getJobPostingDetails
 } from "../services";
 
 const createEmployerController = async (
@@ -45,8 +46,22 @@ const getAllEmpoyerJobPostingsController = async (
   }
 };
 
+const getJobPostingDetailsController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const jobPosting = await getJobPostingDetails(Number(req.params.id));
+    res.status(StatusCodes.OK).json(jobPosting);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   createEmployerController,
   createJobPostingController,
   getAllEmpoyerJobPostingsController,
+  getJobPostingDetailsController
 };

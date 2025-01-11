@@ -1,12 +1,12 @@
-import { PrismaClient } from "@prisma/client";
-import {  IUserCreate } from "utils/types";
+import { Prisma, PrismaClient } from "@prisma/client";
+
 
 class AuthRepository {
   private prisma: PrismaClient;
   constructor() {
     this.prisma = new PrismaClient();
   }
-  async createUser(data: IUserCreate) {
+  async createUser(data: Prisma.UserCreateInput) {
     return await this.prisma.user.create({ data });
   }
   async getUserByEmail(email: string) {

@@ -8,3 +8,9 @@ export enum JobType {
   PART_TIME = "part_time",
   CONTRACT = "contract",
 }
+
+export enum ApplicationStatus {
+  Pending = "pending",
+  Accepted = "accepted",
+  Rejected = "rejected",
+}

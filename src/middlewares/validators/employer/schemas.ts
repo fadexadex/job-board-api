@@ -1,7 +1,7 @@
 import Joi from "joi";
-import { IEmployerCreate, ICreateJobPosting } from "utils/types";
+import { IEmployer, ICreateJobPosting } from "utils/types";
 
-export const createEmployerSchema = Joi.object<IEmployerCreate>({
+export const createEmployerSchema = Joi.object<IEmployer>({
   companyName: Joi.string().optional(),
   companySize: Joi.number().optional(),
   industry: Joi.string().optional(),

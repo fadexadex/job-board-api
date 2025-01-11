@@ -1,29 +1,29 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 
-class EmployerRepository {
+class JobSeekerRepository {
   private prisma: PrismaClient;
   constructor() {
     this.prisma = new PrismaClient();
   }
-  async createEmployer(data: Prisma.EmployerCreateInput) {
-    return await this.prisma.employer.create({ data });
+  async createJobSeeker(data: Prisma.JobSeekerProfileCreateInput) {
+    return await this.prisma.jobSeekerProfile.create({ data });
   }
-  async createJobPosting(data: Prisma.JobPostingsCreateInput) {
-    return await this.prisma.jobPostings.create({ data });
-  }
-  async getAllEmpoyerJobPostings(employerId: number) {
+
+  async getAllJobPostings() {
     return await this.prisma.jobPostings.findMany({
-      where: {
-        employerId,
-      },
       select: {
         id: true,
         jobTitle: true,
         jobType: true,
+        minSalary: true,
+        maxSalary: true,
+        locations: true,
+        requiredSkills: true,
         createdAt: true,
       },
     });
   }
+
   async getJobPostingDetails(jobPostingId: number) {
     return await this.prisma.jobPostings.findUnique({
       where: {
@@ -31,6 +31,8 @@ class EmployerRepository {
       },
     });
   }
+
+  
 }
 
-export default EmployerRepository;
+export default JobSeekerRepository;

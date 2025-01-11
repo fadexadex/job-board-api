@@ -3,6 +3,7 @@ import {
   createEmployerController,
   createJobPostingController,
   getAllEmpoyerJobPostingsController,
+  getJobPostingDetailsController,
 } from "./controllers";
 import {
   validateCreateEmployer,
@@ -35,6 +36,14 @@ router.get(
   employerGuard,
   validateEmployerId,
   getAllEmpoyerJobPostingsController
+);
+
+router.get(
+  "/job-postings/:id/details",
+  authGuard,
+  employerGuard,
+  validateEmployerId,
+  getJobPostingDetailsController
 );
 
 export default router;

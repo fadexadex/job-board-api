@@ -60,7 +60,7 @@ model JobSeekerProfile {
   userId         Int          @unique
   location       String?      // Single location (country)
   skills         String[]    // Array of job seeker skills
-  resumeUrl      String?
+  resumeUrl      String
   coverLetterUrl String?
   linkedin       String?
   github         String?
