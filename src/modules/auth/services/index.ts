@@ -43,7 +43,10 @@ const register = async ({
 const login = async ({ email, password }: IUserLoginBody) => {
   const user = await authRepository.getUserByEmail(email);
   if (!user) {
-    throw new AppError("No user with provided email exists", StatusCodes.NOT_FOUND);
+    throw new AppError(
+      "No user with provided email exists",
+      StatusCodes.NOT_FOUND
+    );
   }
 
   const isPasswordMatch = await comparePassword(password, user.password);

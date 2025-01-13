@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  applyForAJobController,
   createJobSeekerProfileController,
   getAllJobPostingsController,
   getJobPostingDetailsController,
@@ -16,6 +17,8 @@ router.post(
   ]),
   createJobSeekerProfileController
 );
+
+router.post("/apply/:jobId", applyForAJobController);
 
 router.get("/job-postings", getAllJobPostingsController);
 

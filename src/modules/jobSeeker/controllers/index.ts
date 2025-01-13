@@ -2,8 +2,9 @@ import {
   createJobSeekerProfile,
   getAllJobPostings,
   getJobPostingDetails,
+  applyForAJob,
 } from "../services";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, response } from "express";
 import { StatusCodes } from "http-status-codes";
 import uploadDocToCloud from "../../../utils/uploadDocToClodinary";
 import { IFilter } from "utils/types";
@@ -32,6 +33,31 @@ const createJobSeekerProfileController = async (
     const user = await createJobSeekerProfile(req.body);
 
     res.status(StatusCodes.CREATED).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// const applyForAJob = async (jobId: string, jobSeekerId: number) => {
+//   const jobSeekerProfile: IJobSeeker = await jobSeekerRepository.getJobSeekerProfile(jobSeekerId);
+//   return await jobSeekerRepository.createJobApplicationWithProfile(
+//     jobId,
+//     jobSeekerProfile
+//   );
+// };
+
+const applyForAJobController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { jobSeekerId } = req.body;
+    const { jobId } = req.params;
+    const application = await applyForAJob(jobId, jobSeekerId);
+    res
+      .status(StatusCodes.CREATED)
+      .json({ message: "Applied for job successfully", response: application });
   } catch (error) {
     next(error);
   }
@@ -72,6 +98,7 @@ const getJobPostingDetailsController = async (
 
 export {
   createJobSeekerProfileController,
+  applyForAJobController,
   getAllJobPostingsController,
   getJobPostingDetailsController,
 };

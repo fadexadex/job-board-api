@@ -11,6 +11,7 @@ interface IApplication {
 }
 
 export interface IJobSeeker {
+  id: number
   userId: number;
   location?: string;
   skills: string[];
@@ -19,7 +20,7 @@ export interface IJobSeeker {
   linkedin?: string;
   github?: string;
   twitter?: string;
-  applications: IApplication[];
+  applications?: IApplication[];
 }
 
 export interface IFilter {

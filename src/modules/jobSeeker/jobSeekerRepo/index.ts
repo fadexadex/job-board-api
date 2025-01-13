@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { IFilter } from "utils/types";
+import { IFilter, IJobSeeker } from "utils/types";
 
 class JobSeekerRepository {
   private prisma: PrismaClient;
@@ -29,6 +29,26 @@ class JobSeekerRepository {
         locations: true,
         requiredSkills: true,
         createdAt: true,
+      },
+    });
+  }
+
+  async createJobApplicationWithProfile(
+    jobPostingId: string,
+    jobSeekerProfile: IJobSeeker
+  ) {
+    return await this.prisma.applications.create({
+      data: {
+        jobId: parseInt(jobPostingId),
+        jobSeekerId: jobSeekerProfile.id,
+      },
+    });
+  }
+
+  async getJobSeekerProfile(jobSeekerId: number) {
+    return await this.prisma.jobSeekerProfile.findUnique({
+      where: {
+        id: jobSeekerId,
       },
     });
   }
