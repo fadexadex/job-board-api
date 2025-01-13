@@ -5,9 +5,12 @@ import {
   getAllJobPostingsController,
   getJobPostingDetailsController,
 } from "./controllers";
+import { authGuard, jobSeekerGuard } from "middlewares/authGuard";
 import upload from "../../utils/multer";
 
 const router = Router();
+
+//next up create validation schemas for the routes
 
 router.post(
   "/create-profile",
@@ -18,10 +21,20 @@ router.post(
   createJobSeekerProfileController
 );
 
-router.post("/apply/:jobId", applyForAJobController);
+router.post("/apply/:jobId", authGuard, jobSeekerGuard, applyForAJobController);
 
-router.get("/job-postings", getAllJobPostingsController);
+router.get(
+  "/job-postings",
+  authGuard,
+  jobSeekerGuard,
+  getAllJobPostingsController
+);
 
-router.get("/job-postings/:id", getJobPostingDetailsController);
+router.get(
+  "/job-postings/:id",
+  authGuard,
+  jobSeekerGuard,
+  getJobPostingDetailsController
+);
 
 export default router;

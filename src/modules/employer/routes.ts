@@ -46,4 +46,6 @@ router.get(
   getJobPostingDetailsController
 );
 
+router.get("/get-all-applications", authGuard, employerGuard, );
+
 export default router;
