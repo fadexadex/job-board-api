@@ -11,13 +11,14 @@ class JobSeekerRepository {
   }
 
   async getAllJobPostings(filterObj: IFilter) {
-
     return await this.prisma.jobPostings.findMany({
-      where:{
-        ...(filterObj?.jobType && { jobType: filterObj.jobType }),
-        ...(filterObj?.minSalary && { minSalary: { gte: filterObj.minSalary } }),
-        ...(filterObj?.maxSalary && { maxSalary: { lte: filterObj.maxSalary } }),
-        ...(filterObj?.location && { locations: { hasSome: filterObj.location } }),
+      where: {
+        ...(filterObj.jobType && { jobType: filterObj.jobType }),
+        ...(filterObj.minSalary && { minSalary: { gte: filterObj.minSalary } }),
+        ...(filterObj.maxSalary && { maxSalary: { lte: filterObj.maxSalary } }),
+        ...(filterObj.location && {
+          locations: { hasSome: filterObj.location },
+        }),
       },
       select: {
         id: true,
@@ -39,8 +40,6 @@ class JobSeekerRepository {
       },
     });
   }
-
-  
 }
 
 export default JobSeekerRepository;
